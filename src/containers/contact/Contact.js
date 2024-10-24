@@ -3,8 +3,6 @@ import "./Contact.scss";
 import SocialMedia from "../../components/socialMedia/SocialMedia";
 import {illustration, contactInfo} from "../../portfolio";
 import {Fade} from "react-reveal";
-import email from "../../assets/lottie/email";
-import DisplayLottie from "../../components/displayLottie/DisplayLottie";
 import StyleContext from "../../contexts/StyleContext";
 
 export default function Contact() {
@@ -52,15 +50,14 @@ export default function Contact() {
               <SocialMedia />
             </div>
           </div>
+
+          {/* Replace the Lottie animation with your photo */}
           <div className="contact-image-div">
-            {illustration.animated ? (
-              <DisplayLottie animationData={email} />
-            ) : (
-              <img
-                alt="Man working"
-                src={require("../../assets/images/contactMailDark.svg")}
-              ></img>
-            )}
+            <img
+              alt="Vivek Nandimandalam"
+              src={require("../../assets/images/ProfilePic.jpg")} // Path to your photo
+              className="contact-photo"  // Optional: Add a CSS class for styling
+            />
           </div>
         </div>
       </div>

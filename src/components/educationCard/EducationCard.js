@@ -1,12 +1,13 @@
-import React, {createRef, useContext} from "react";
-import {Fade, Slide} from "react-reveal";
+import React, { createRef, useContext } from "react";
+import { Fade, Slide } from "react-reveal";
 import "./EducationCard.scss";
 import StyleContext from "../../contexts/StyleContext";
 
-export default function EducationCard({school}) {
+export default function EducationCard({ school }) {
   const imgRef = createRef();
+  const { isDark } = useContext(StyleContext);
 
-  const GetDescBullets = ({descBullets}) => {
+  const GetDescBullets = ({ descBullets }) => {
     return descBullets
       ? descBullets.map((item, i) => (
           <li key={i} className="subTitle">
@@ -15,10 +16,19 @@ export default function EducationCard({school}) {
         ))
       : null;
   };
-  const {isDark} = useContext(StyleContext);
 
   if (!school.logo)
     console.error(`Image of ${school.name} is missing in education section`);
+
+  // Check for CGPA, GPA, or Percentage to display dynamically
+  const academicDetail = school.CGPA
+    ? `CGPA: ${school.CGPA}`
+    : school.GPA
+    ? `GPA: ${school.GPA}`
+    : school.Percentage
+    ? `Percentage: ${school.Percentage}%`
+    : null;
+
   return (
     <div>
       <Fade left duration={1000}>
@@ -54,6 +64,18 @@ export default function EducationCard({school}) {
               >
                 {school.duration}
               </p>
+
+              {/* Display CGPA, GPA, or Percentage */}
+              {academicDetail && (
+                <p
+                  className={`${
+                    isDark ? "dark-mode" : ""
+                  } education-text-subHeader`}
+                >
+                  {academicDetail}
+                </p>
+              )}
+
               <p className="education-text-desc">{school.desc}</p>
               <div className="education-text-bullets">
                 <ul>
